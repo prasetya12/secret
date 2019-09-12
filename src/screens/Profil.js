@@ -5,7 +5,7 @@ import Header from '../components/Header'
 class Profil extends Component{
     render(){
         return(
-            <View>
+            <View style={{backgroundColor:'#EAECEE',flex:1}}>
                 <Header/>
                 <Text>
                     Profil Screen 

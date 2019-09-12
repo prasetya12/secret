@@ -62,36 +62,37 @@ const ProfilStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarIcon : ({tintColor})=>(
-    <Icon name='library-books' type='MaterialCommunityIcons' style={{color:tintColor || 'black',fontSize:20}}/>
+    <Icon name='home' type='Entypo' style={{color:tintColor || 'black',fontSize:25}}/>
 
   )
 }
 
 NotificationStack.navigationOptions = {
   tabBarIcon : ({tintColor})=>(
-    <Icon name='library-books' type='MaterialCommunityIcons' style={{color:tintColor || 'black',fontSize:20}}/>
+    <Icon name='notifications' type='MaterialIcons' style={{color:tintColor || 'black',fontSize:25}}/>
 
   )
 }
 
 AddStack.navigationOptions = {
   tabBarIcon : ({tintColor})=>(
-    <Icon name='library-books' type='MaterialCommunityIcons' style={{color:tintColor || 'black',fontSize:20}}/>
+    <Icon name='plus' type='Entypo' style={{color:'white',fontSize:25}}/>
 
   )
 }
 
 NearbyStack.navigationOptions = {
   tabBarIcon : ({tintColor})=>(
-    <Icon name='library-books' type='MaterialCommunityIcons'  style={{color:tintColor || 'black',fontSize:20}}/>
+    <Icon name='map-marker' type='MaterialCommunityIcons'  style={{color:tintColor || 'black',fontSize:25}}/>
 
   )
 }
 
-Profil.navigationOptions = {
+ProfilStack.navigationOptions = {
   tabBarIcon : ({tintColor})=>(
-    <Icon name='library-books' type='MaterialCommunityIcons' style={{color:tintColor || 'black',fontSize:20}}/>
-  )
+    <Icon name='md-person' type='Ionicons'  style={{color:tintColor || 'black',fontSize:25}}/>
+    
+    )
 }
 
 const BottomNavigation = createBottomTabNavigator({
@@ -106,7 +107,7 @@ const BottomNavigation = createBottomTabNavigator({
   tabBarPosition:'bottom',
   tabBarComponent:props=>{
     return(
-      <View style={{backgroundColor:'white',height:52,borderTopColor:'grey',elevation:2,borderTopRightRadius:50,borderTopLeftRadius:50,left:0,right:0,bottom:0,position:'absolute'}}>
+      <View style={{backgroundColor:'#F7F8FA',height:52,borderTopColor:'grey',elevation:2,borderTopRightRadius:25,borderTopLeftRadius:25,left:0,right:0,bottom:0,position:'absolute'}}>
         <TabBar {...props}/>
       </View>
     )

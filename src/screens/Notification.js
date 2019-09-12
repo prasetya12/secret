@@ -5,7 +5,7 @@ import Header from '../components/Header'
 class Notification extends Component{
     render(){
         return(
-            <View>
+            <View style={{backgroundColor:'#EAECEE',flex:1}}>
                 <Header/>
                 <Text>
                     Notification Screen 

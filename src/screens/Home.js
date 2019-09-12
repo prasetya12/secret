@@ -4,11 +4,11 @@ import Header from '../components/Header'
 import { YellowBox } from 'react-native';
 
 class Home extends Component{
+    constructor(props) { 
+        super(props); 
+        console.disableYellowBox = true;
+      }
     render(){
-        YellowBox.ignoreWarnings([
-            'Warning: componentWillMount is deprecated',
-            'Warning: componentWillReceiveProps is deprecated',
-          ]);
         return(
             <View style={{backgroundColor:'#EAECEE',flex:1}}>
                 <Header/>

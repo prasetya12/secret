@@ -5,7 +5,7 @@ import Header from '../components/Header'
 class Nearby extends Component{
     render(){
         return(
-            <View>
+            <View style={{backgroundColor:'#EAECEE',flex:1}}>
                 <Header/>
                 <Text>Nearby</Text>
             </View>
