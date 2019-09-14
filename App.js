@@ -2,15 +2,17 @@ import React,{Component} from 'react'
 import Home from './src/screens/Home'
 import Notification from './src/screens/Notification'
 import Login from './src/screens/Login'
+import Registration from './src/screens/Registration'
 import Add from './src/screens/Add'
 import Nearby from './src/screens/Nearby'
 import Profil from './src/screens/Profil'
+import Welcome from './src/screens/Welcome'
 import { Icon, View } from 'native-base';
 import TabBar from './src/components/TabBar'
 
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 
 
@@ -121,6 +123,18 @@ const BottomNavigation = createBottomTabNavigator({
 
 
 const AppNavigator = createStackNavigator({
+  Welcome:{
+    screen:Welcome,
+    navigationOptions:{
+      header:null
+    }
+  },
+  Registration:{
+    screen:Registration,
+    navigationOptions:{
+      header:null
+    }
+  },
   Login:{
     screen:Login,
     navigationOptions:{
@@ -134,7 +148,7 @@ const AppNavigator = createStackNavigator({
     }
   }
 },{
-  initialRouteName:"Login"
+  initialRouteName:"Registration"
 });
 
 export default createAppContainer(AppNavigator)
