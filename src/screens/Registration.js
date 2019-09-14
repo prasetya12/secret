@@ -33,7 +33,7 @@ class Registration extends Component{
                         </View>
                     </View>
                     <View style={{alignItems:'center',flex:1,marginTop:height*0.05,bottom:0}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Registration')}>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Verification')}>
                             <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#6B56FC', '#5511A3']} style={{borderRadius:50,height:50,width:200,justifyContent:'flex-end',alignItems:'center',flexDirection:'row'}}>
                                     <View style={{flex:1}}>
                                         <Text style={{color:'white',fontWeight:'bold',alignSelf:'center'}}>GET OTP</Text>

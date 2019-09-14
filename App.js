@@ -3,6 +3,7 @@ import Home from './src/screens/Home'
 import Notification from './src/screens/Notification'
 import Login from './src/screens/Login'
 import Registration from './src/screens/Registration'
+import Verification from './src/screens/Verification'
 import Add from './src/screens/Add'
 import Nearby from './src/screens/Nearby'
 import Profil from './src/screens/Profil'
@@ -135,6 +136,12 @@ const AppNavigator = createStackNavigator({
       header:null
     }
   },
+  Verification:{
+    screen:Verification,
+    navigationOptions:{
+      header:null
+    }
+  },
   Login:{
     screen:Login,
     navigationOptions:{
@@ -148,7 +155,7 @@ const AppNavigator = createStackNavigator({
     }
   }
 },{
-  initialRouteName:"Registration"
+  initialRouteName:"Welcome"
 });
 
 export default createAppContainer(AppNavigator)
