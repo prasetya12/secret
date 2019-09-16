@@ -8,13 +8,15 @@ import { Icon } from 'native-base'
 
 
 class Verification extends Component{
+    _onFulfill=(code)=>{
+        if(code){
+            this.props.navigation.navigate('Login')   
+        }
+    }
+
     render(){
         const width = Dimensions.get('window').width
         const height = Dimensions.get('window').height
-
-        _onFulfill=()=>{
-            console.log('hay')
-        }
 
         return(
             <ScrollView style={{flex:1}}>
@@ -33,7 +35,7 @@ class Verification extends Component{
                             className={'border-box'}
                             activeColor='#6B56FC'
                             inactiveColor='#5511A3'
-                            compareWithCode='AsDw'
+                            compareWithCode='1111'
                             codeLength={4}
                             space={1}
                             size={50}
