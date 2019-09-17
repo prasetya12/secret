@@ -16,7 +16,7 @@ class Welcome extends Component{
                     <Illustration width={width*1.7} height={height*1.7} style={{marginTop:height*-0.7}}/>
                 </View>
                 <View style={{flex:3}} >
-                    <Logo width={width*0.6} height={height*0.6} style={{marginTop:height*-0.2}}/>
+                    <Logo width={width*0.5} height={height*0.5} style={{marginTop:height*-0.1}}/>
                 </View>
                 <View style={{flex:1}}>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate('Registration')}>

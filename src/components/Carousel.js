@@ -8,7 +8,7 @@ import Content from '../assets/image1.svg'
 
 const Carousel = (props)=>{
     return(
-        <Swiper style={styles.wrapper} >
+        <Swiper style={styles.wrapper} activeDotColor={"#30375A"} dotStyle={{marginTop:-20}} activeDotStyle={{marginTop:-20}}>
             <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
               <View style={styles.slide1}>
                 <Content width={320} height={350} />
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   wrapper: {
     alignItems:'center',
     justifyContent:'center',
-    height:300
+    height:280
   },
   slide1: {
     width:320,
