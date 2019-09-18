@@ -155,7 +155,7 @@ const AppNavigator = createStackNavigator({
     }
   }
 },{
-  initialRouteName:"Welcome"
+  initialRouteName:"Root"
 });
 
 export default createAppContainer(AppNavigator)
