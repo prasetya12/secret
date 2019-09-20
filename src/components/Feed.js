@@ -14,7 +14,7 @@ const Feed = (props)=>(
         </View>
         <View style={{flex:4,flexDirection:'column'}}>
             <View style={{flex:3}}>
-                <Text style={{fontSize:16,fontWeight:'bold',color:'color:"rgba(2,5,43)"'}}>
+                <Text style={{fontSize:16,fontWeight:'bold',color:'rgb(2,5,43)'}}>
                     {props.content}
                 </Text>
             </View>
