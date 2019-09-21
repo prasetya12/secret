@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View,Text,ScrollView,TouchableOpacity} from 'react-native'
+import {View,Text,ScrollView,TouchableOpacity,AsyncStorage} from 'react-native'
 import { Button,Container} from 'native-base'
 import Carousel from '../components/Carousel'
 import HeaderDashboard from '../components/HeaderDashboard'
@@ -16,7 +16,21 @@ class Dashboard extends Component{
     constructor(props) { 
         super(props); 
         console.disableYellowBox = true;
+        this.state={
+            accessToken:"",
+            accountId:""
+        }
       }
+
+
+    async componentDidMount(){
+        const token = await AsyncStorage.getItem("accessToken");
+        const accountId = await AsyncStorage.getItem("accountId");
+
+        this.setState({accessToken:token})
+        this.setState({accountId})
+
+    }
 
     render(){
         return(

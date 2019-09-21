@@ -1,52 +1,64 @@
 import React,{Component} from 'react'
-import {View,Text,TouchableOpacity,Dimensions} from 'react-native'
+import {View,Text,TouchableOpacity,Dimensions,AsyncStorage} from 'react-native'
 import Illustration from '../assets/welcome.svg'
 import Logo from '../assets/main_logo.svg'
 import LinearGradient from 'react-native-linear-gradient'
 import axios from 'axios'
 
+import qs from 'qs'
+
 import API from '../constant/constant'
 
 class Welcome extends Component{
-    clientId = 1
+    constructor(props){
+        super(props)
+        this.state={
+            clientId:1,
+            accessToken:"",
+            accountId:"",
+            isLoading:false
+            
+        }
+    }
+
     tsLong = new Date().getTime()
     A = this.tsLong.toString();
     facebookId = this.A;
     getUserSecret = "s" + this.A;
     getPassSecret = this.A;
     getEmailSecret = "secret+" + this.A + "@Gmail.com";
-    //  myDate="26-02-2012";
-    // myDate=myDate.split("-");
-    // var newDate=myDate[1]+"/"+myDate[0]+"/"+myDate[2];
-    // alert(new Date(newDate).getTime());
 
+    onClick = ()=>{
+        this.setState({isLoading:true})
 
-    onClick = ()=>(
-        // axios.post(`${API}/account.signUp.inc.php`,{
-            
-        // })
-        axios.post("https://old.secretly.tech/api/v1/method/account.signUp.inc.php", {
-            body:{
-                clientId:1,
-                username:"s898191",
-                password:"8981019",
-                email:"s898191@gmail.com"
-            },
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-          .then(response =>{
-              alert(JSON.stringify(response))
-          }      
-          )
-          .catch(function (error) {
+        axios.post(`${API}/account.signUp.inc.php`, qs.stringify({
+            clientId: this.state.clientId,
+            username: this.getUserSecret,
+            password: this.getPassSecret,
+            email: this.getEmailSecret
+        })).then(response =>{
+
+                accessToken = JSON.stringify(response.data.accessToken)
+                accountId = JSON.stringify(response.data.accountId)
+
+                  AsyncStorage.multiSet([
+                    ["accessToken", accessToken],
+                    ["accountId", accountId]
+                ]).then(() => {
+                    this.setState({ isLoading: false });
+                    this.props.navigation.push("Dashboard");
+                  });
+    
+          }).catch(function (error) {
             alert(error);
           })
-    )
+        }
 
+
+  
     
     render(){
+
         const width = Dimensions.get('window').width
         const height = Dimensions.get('window').height
         return(

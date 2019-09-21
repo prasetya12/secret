@@ -9,6 +9,12 @@ import Feed from '../components/Feed'
 
 import {GET_TEST} from '../redux/actions/Test'
 
+import axios from 'axios'
+
+import qs from 'qs'
+
+import API from '../constant/constant'
+
 class Home extends Component{
 
     
@@ -18,7 +24,11 @@ class Home extends Component{
         this.state={
             is_Liked:false,
             like_count:0,
-            data:{}
+            data:{},
+            clientId:1,
+            accessToken:"",
+            accountId:""
+
         }
       }
     onPress = ()=>(
@@ -26,9 +36,24 @@ class Home extends Component{
     )
 
 
-    async componentDidMount(){
-        await this.props.dispatch(GET_TEST());
-        this.setState({data:this.props.test.data})
+    componentDidMount(){
+        // await this.props.dispatch(GET_TEST());
+        // this.setState({data:this.props.test.data})
+        // const token = await AsyncStorage.getItem("accessToken");
+        // const accountId = await AsyncStorage.getItem("accountId");
+
+        // this.setState({accessToken:token})
+        // this.setState({accountId})
+
+        axios.post(`${API}/stream.get.inc.php`, qs.stringify({
+            clientId: 1,
+            accessToken:"4df09339129adc6d7c5419945422cdf7",
+            accountId:51
+        })).then(response =>{
+            alert(JSON.stringify(response))
+          }).catch(function (error) {
+            alert(error);
+          })
     }
 
 
