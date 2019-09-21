@@ -22,7 +22,7 @@ class Verification extends Component{
             <ScrollView style={{flex:1}}>
                 <View style={{alignItems:'center',flex:1}}>
                     <View style={{flex:1}}>
-                            <Illustration style={{height:height*0.1,width:width*0.1,marginTop:-172}}/>
+                            <Illustration style={{height:height*0.1,width:width*0.1,marginTop:-189}}/>
                     </View>
                     <View style={{alignItems:'center'}}>
                         <Text style={{fontWeight:'bold'}}>

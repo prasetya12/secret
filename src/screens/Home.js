@@ -38,6 +38,8 @@ class Home extends Component{
             <View style={{backgroundColor:'#EAECEE',flex:1,marginBottom:54}}>
                 <Header/>
                 <ScrollView>
+                
+                
                     <Feed
                         is_Liked={this.state.is_Liked}
                         onPress={this.onPress}

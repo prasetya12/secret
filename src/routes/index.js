@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import Home from '../screens/Home'
 import Notification from '../screens/Notification'
-import Login from '../screens/Login'
+import Dashboard from '../screens/Dashboard'
 import Registration from '../screens/Registration'
 import Verification from '../screens/Verification'
 import Add from '../screens/Add'
@@ -142,8 +142,8 @@ const AppNavigator = createStackNavigator({
       header:null
     }
   },
-  Login:{
-    screen:Login,
+  Dashboard:{
+    screen:Dashboard,
     navigationOptions:{
       header:null
     }
@@ -155,7 +155,7 @@ const AppNavigator = createStackNavigator({
     }
   }
 },{
-  initialRouteName:"Root"
+  initialRouteName:"Welcome"
 });
 
 export default createAppContainer(AppNavigator)

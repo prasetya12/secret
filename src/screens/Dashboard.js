@@ -12,7 +12,7 @@ import Menu4 from '../assets/menu4.svg'
 
 
 
-class Login extends Component{
+class Dashboard extends Component{
     constructor(props) { 
         super(props); 
         console.disableYellowBox = true;
@@ -102,4 +102,4 @@ class Login extends Component{
     }
 }
 
-export default Login
+export default Dashboard

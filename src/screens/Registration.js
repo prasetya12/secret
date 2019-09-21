@@ -16,7 +16,7 @@ class Registration extends Component{
                 <ScrollView style={{flex:1}}>
                     <View style={{alignItems:'center',flex:1}}>
                         <View style={{flex:1}}>
-                            <Illustration style={{height:height*0.1,width:width*0.1,marginTop:-172}}/>
+                            <Illustration style={{height:height*0.1,width:width*0.1,marginTop:-189}}/>
                         </View>
                         <View style={{flex:1,alignItems:'center',marginTop:-150}}>
                             <Text style={{color:'rgba(0,0,0,0.5)',marginBottom:10,fontWeight:'bold'}}>OTP Verification</Text>
