@@ -45,6 +45,7 @@ class Dashboard extends Component{
         return(
             <Container>
                 <HeaderDashboard/>
+                <ScrollView>
                 <View style={{height:280}}>
                     <Carousel/>
                 </View>
@@ -119,7 +120,7 @@ class Dashboard extends Component{
                         </View>
                     </View>
                 </View>
-                
+                </ScrollView>
             </Container>
         )
     }

@@ -9,6 +9,9 @@ import qs from 'qs'
 
 import API from '../constant/constant'
 
+
+
+
 class Welcome extends Component{
     constructor(props){
         super(props)
@@ -16,10 +19,11 @@ class Welcome extends Component{
             clientId:1,
             accessToken:"",
             accountId:"",
-            isLoading:false
+            isLoading:false,
+            tl:0
         }
     }
-
+    
     tsLong = new Date().getTime()
     A = this.tsLong.toString();
     facebookId = this.A;

@@ -25,7 +25,7 @@ class Home extends Component{
             is_Liked:false,
             like_count:0,
             data:[],
-            clientId:"",
+            clientId:1,
             accessToken:"",
             accountId:"",
             itemId:0,
