@@ -17,6 +17,8 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 
 
+
+
 const HomeStack = createStackNavigator({
   Home:{
     screen:Home,
@@ -110,7 +112,7 @@ const BottomNavigation = createBottomTabNavigator({
   tabBarPosition:'bottom',
   tabBarComponent:props=>{
     return(
-      <View style={{backgroundColor:'#F7F8FA',height:52,borderTopColor:'grey',elevation:2,borderTopRightRadius:25,borderTopLeftRadius:25,left:0,right:0,bottom:0,position:'absolute'}}>
+      <View style={{backgroundColor:'#F7F8FA',height:52,borderTopColor:'grey',elevation:2,left:0,right:0,bottom:0,position:'absolute'}}>
         <TabBar {...props}/>
       </View>
     )
