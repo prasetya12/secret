@@ -22,8 +22,27 @@ class Welcome extends Component{
 
 
     onClick = ()=>(
-        axios.post(`${API}/all_menu`)
-
+        // axios.post(`${API}/account.signUp.inc.php`,{
+            
+        // })
+        axios.post("https://old.secretly.tech/api/v1/method/account.signUp.inc.php", {
+            body:{
+                clientId:1,
+                username:"s898191",
+                password:"8981019",
+                email:"s898191@gmail.com"
+            },
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+          .then(response =>{
+              alert(JSON.stringify(response))
+          }      
+          )
+          .catch(function (error) {
+            alert(error);
+          })
     )
 
     
