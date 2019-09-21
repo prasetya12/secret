@@ -20,8 +20,8 @@ const Feed = (props)=>(
             </View>
             <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
                 <Text style={{fontSize:12,color:"rgba(2,5,43,0.4)",fontWeight:'bold'}}>Bandung,1m ago</Text>
-                <Icon name="forward" type="Entypo" style={{fontSize:16,marginLeft:10,color:"rgba(2,5,43,0.4)"}}/>
-                <Text style={{fontSize:12,color:"rgba(2,5,43,0.4)",fontWeight:'bold',marginLeft:5}}>0</Text>
+                {props.comment_count==0?(<View/>):(<View style={{flexDirection:'row'}}><Icon name="forward" type="Entypo" style={{fontSize:16,marginLeft:10,color:"rgba(2,5,43,0.4)"}}/>
+                <Text style={{fontSize:12,color:"rgba(2,5,43,0.4)",fontWeight:'bold',marginLeft:5}}>0</Text></View>)}
             </View>
         </View>
         <View style={{flex:1,alignItems:'flex-end'}}>

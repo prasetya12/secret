@@ -18,7 +18,8 @@ class Dashboard extends Component{
         console.disableYellowBox = true;
         this.state={
             accessToken:"",
-            accountId:""
+            accountId:"",
+            clientId:1
         }
       }
 
@@ -32,6 +33,14 @@ class Dashboard extends Component{
 
     }
 
+    btnHome=()=>{
+        this.props.navigation.navigate('Home',{
+            accessToken:this.state.accessToken,
+            accountId:this.state.accountId,
+            clientId:this.state.clientId
+        })
+    }
+
     render(){
         return(
             <Container>
@@ -42,7 +51,7 @@ class Dashboard extends Component{
                 <View style={{justifyContent:'center'}}>
                     <ScrollView horizontal={true} style={{height:120}} showsHorizontalScrollIndicator={false}>
                         <View style={{alignItems:'center',justifyContent:'center',marginLeft:16,marginRight:8}}>
-                                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Root')}>
+                                <TouchableOpacity onPress={()=>this.btnHome()}>
                                     <LinearGradient start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
             locations={[0,0.5,0.6]} colors={['#3B0AFF', '#020549']} style={{width:65,height:65,borderRadius:20,elevation:5,justifyContent:'center',alignItems:'center'}}>
                                             <Menu1/>
