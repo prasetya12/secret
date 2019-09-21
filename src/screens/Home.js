@@ -38,16 +38,19 @@ class Home extends Component{
     )
 
     retrieveData=(bottomrefresh=false)=>{
-        if(this.state.itemId>=0){
+        if(this.state.itemId<0){
+            null;
+        }else{
             axios.post(`${API}/stream.get.inc.php`, qs.stringify({
                 clientId: this.state.clientId,
                 accessToken:this.state.accessToken,
                 accountId:this.state.accountId,
+                itemId:this.state.itemId
             })).then(response =>{
                 this.setState({
-                    data:response.data.items
+                    data:[...this.state.data,...response.data.items],
+                    itemId:response.data.itemId
                 })
-                alert(JSON.stringify(response.data.items))
                 // this.setState({data:response.data.items,
                 //                 itemId:response.data.itemId-20})
                 // alert(JSON.stringify(response.data.items))
@@ -60,6 +63,14 @@ class Home extends Component{
 
        
     }
+
+
+    // onScroll = ()=>{
+    //     alert(this.state.itemId)
+    //     this.setState({itemId:this.state.itemId-1})
+    // }
+
+
 
     componentDidMount(){
         // await this.props.dispatch(GET_TEST());
@@ -103,7 +114,6 @@ class Home extends Component{
 
 
     render(){
-        console.log(this.state.data)
         return(
             
             <View style={{backgroundColor:'#EAECEE',flex:1,marginBottom:54}}>
@@ -113,17 +123,18 @@ class Home extends Component{
                         <Feed
                         is_Liked={this.state.like_count}
                         onPress={this.onPress}
-                        content={item.post}
+                        content={item.id}
                         like_count={item.likesCount}
                         comment_count={item.commentsCount}
                         key={index}
                     />
                     
                       )}
-                      data={this.state.data}
+                      data={this.state.data}   
                       keyExtractor={item => item.id}
                     //   ListFooterComponent={this._renderFooter}
-                    //   onEndReached={this.retrieveData(true)}
+                      onEndReached={()=>this.retrieveData()}
+                      
                 />
                 {/* <ScrollView>
                     {this.state.data.map((item,index)=>(
