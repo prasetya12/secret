@@ -17,7 +17,6 @@ class Welcome extends Component{
             accessToken:"",
             accountId:"",
             isLoading:false
-            
         }
     }
 
