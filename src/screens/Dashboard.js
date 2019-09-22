@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View,Text,ScrollView,TouchableOpacity} from 'react-native'
+import {View,Text,ScrollView,TouchableOpacity,AsyncStorage} from 'react-native'
 import { Button,Container} from 'native-base'
 import Carousel from '../components/Carousel'
 import HeaderDashboard from '../components/HeaderDashboard'
@@ -12,11 +12,34 @@ import Menu4 from '../assets/menu4.svg'
 
 
 
-class Login extends Component{
+class Dashboard extends Component{
     constructor(props) { 
         super(props); 
         console.disableYellowBox = true;
+        this.state={
+            accessToken:"",
+            accountId:"",
+            clientId:1
+        }
       }
+
+
+    async componentDidMount(){
+        const token = await AsyncStorage.getItem("accessToken");
+        const accountId = await AsyncStorage.getItem("accountId");
+
+        this.setState({accessToken:token})
+        this.setState({accountId})
+
+    }
+
+    btnHome=()=>{
+        this.props.navigation.navigate('Home',{
+            accessToken:this.state.accessToken,
+            accountId:this.state.accountId,
+            clientId:this.state.clientId
+        })
+    }
 
     render(){
         return(
@@ -28,7 +51,7 @@ class Login extends Component{
                 <View style={{justifyContent:'center'}}>
                     <ScrollView horizontal={true} style={{height:120}} showsHorizontalScrollIndicator={false}>
                         <View style={{alignItems:'center',justifyContent:'center',marginLeft:16,marginRight:8}}>
-                                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Root')}>
+                                <TouchableOpacity onPress={()=>this.btnHome()}>
                                     <LinearGradient start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
             locations={[0,0.5,0.6]} colors={['#3B0AFF', '#020549']} style={{width:65,height:65,borderRadius:20,elevation:5,justifyContent:'center',alignItems:'center'}}>
                                             <Menu1/>
@@ -102,4 +125,4 @@ class Login extends Component{
     }
 }
 
-export default Login
+export default Dashboard

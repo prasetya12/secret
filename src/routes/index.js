@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import Home from '../screens/Home'
 import Notification from '../screens/Notification'
-import Login from '../screens/Login'
+import Dashboard from '../screens/Dashboard'
 import Registration from '../screens/Registration'
 import Verification from '../screens/Verification'
 import Add from '../screens/Add'
@@ -15,6 +15,8 @@ import TabBar from '../components/TabBar'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
+
+
 
 
 const HomeStack = createStackNavigator({
@@ -110,7 +112,7 @@ const BottomNavigation = createBottomTabNavigator({
   tabBarPosition:'bottom',
   tabBarComponent:props=>{
     return(
-      <View style={{backgroundColor:'#F7F8FA',height:52,borderTopColor:'grey',elevation:2,borderTopRightRadius:25,borderTopLeftRadius:25,left:0,right:0,bottom:0,position:'absolute'}}>
+      <View style={{backgroundColor:'#F7F8FA',height:52,borderTopColor:'grey',elevation:2,left:0,right:0,bottom:0,position:'absolute'}}>
         <TabBar {...props}/>
       </View>
     )
@@ -142,8 +144,8 @@ const AppNavigator = createStackNavigator({
       header:null
     }
   },
-  Login:{
-    screen:Login,
+  Dashboard:{
+    screen:Dashboard,
     navigationOptions:{
       header:null
     }
