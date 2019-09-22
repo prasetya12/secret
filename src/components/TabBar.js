@@ -7,7 +7,7 @@ const TabBar = (props)=>{
     const {routes,index:activeRouteIndex} = navigation.state;
 
     return(
-        <View style={{flexDirection:"row",height:52}}>
+        <View style={{flexDirection:"row",height:50}}>
             
                 
             

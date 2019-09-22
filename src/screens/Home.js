@@ -123,7 +123,7 @@ class Home extends Component{
                         <Feed
                         is_Liked={this.state.like_count}
                         onPress={this.onPress}
-                        content={item.id}
+                        content={item.post}
                         like_count={item.likesCount}
                         comment_count={item.commentsCount}
                         key={index}
