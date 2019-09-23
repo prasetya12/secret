@@ -4,6 +4,17 @@ import { Icon } from 'native-base'
 
 const Header = ()=>(
     <View style={styles.header}>
+        <View
+  style={{
+    backgroundColor: '#00BCD4',
+    height: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
+  }}>
+  <StatusBar
+    translucent
+    backgroundColor="#00BCD4"
+    barStyle="light-content"
+  />
+</View>
         <View style={{flex:1,justifyContent:'center',alignItems:'flex-start'}}>
             <Icon name="menu" type="MaterialCommunityIcons" style={{fontSize:25,color:"#737373"}}/>
         </View>
