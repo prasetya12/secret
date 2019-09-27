@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
     header:{
         backgroundColor:'white',
         height:55,
-        borderBottomRightRadius:25,
-        borderBottomLeftRadius:25,
         elevation:5,
         flexDirection:'row',
         paddingLeft:16,

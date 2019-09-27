@@ -1,4 +1,14 @@
 {
   "name": "secretApp",
-  "displayName": "secretApp"
+  "displayName": "secretApp",
+  "expo": {
+    "name": "Secret",
+    "icon": "./src/assets/2.png",
+    "version": "1.0.0",
+    "slug": "secret-app",
+    "sdkVersion": "35.0.0",
+    "ios": {
+      "bundleIdentifier": "id.anonymous.secret"
+    }
+   }
 }

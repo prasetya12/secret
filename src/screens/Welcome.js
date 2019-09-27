@@ -9,6 +9,9 @@ import qs from 'qs'
 
 import API from '../constant/constant'
 
+
+
+
 class Welcome extends Component{
     constructor(props){
         super(props)
@@ -16,11 +19,11 @@ class Welcome extends Component{
             clientId:1,
             accessToken:"",
             accountId:"",
-            isLoading:false
-            
+            isLoading:false,
+            tl:0
         }
     }
-
+    
     tsLong = new Date().getTime()
     A = this.tsLong.toString();
     facebookId = this.A;
@@ -40,18 +43,24 @@ class Welcome extends Component{
             email: this.getEmailSecret
         })).then(response =>{
 
-                accessToken = JSON.stringify(response.data.accessToken)
-                accountId = JSON.stringify(response.data.accountId)
+                if(response.data.error==false){
+                    accessToken = JSON.stringify(response.data.accessToken)
+                    accountId = JSON.stringify(response.data.accountId)
 
-                  AsyncStorage.multiSet([
-                    ["accessToken", accessToken],
-                    ["accountId", accountId]
-                ]).then(() => {
-                    this.setState({ isLoading: false });
-                    this.props.navigation.push("Dashboard");
-                  });
+                    AsyncStorage.multiSet([
+                        ["accessToken", accessToken],
+                        ["accountId", accountId]
+                    ]).then(() => {
+                        this.setState({ isLoading: false });
+                        this.props.navigation.push("Dashboard")
+
+                        
+                    });
+                }else{
+                    alert("incorect")
+                }
     
-          }).catch(function (error) {
+          }).catch(error => {
             alert(error);
           })
         }
@@ -97,7 +106,7 @@ class Welcome extends Component{
                     <Logo width={width*0.5} height={height*0.5} style={{marginTop:height*-0.1}}/>
                 </View>
                 <View style={{flex:1}}>
-                    <TouchableOpacity onPress={()=>this.onClick()}>
+                    <TouchableOpacity onPress={this.props.onPress}>
                         <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#6B56FC', '#5511A3']} style={{borderRadius:50,height:50,width:200,justifyContent:'center',alignItems:'center'}}>
                                 <Text style={{color:'white',fontWeight:'bold'}}>ENTER</Text>
                         </LinearGradient>
