@@ -11,7 +11,6 @@ import Menu4 from '../assets/menu4.svg'
 
 
 
-
 class Dashboard extends Component{
     constructor(props) { 
         super(props); 
@@ -34,11 +33,13 @@ class Dashboard extends Component{
     }
 
     btnHome=()=>{
-        this.props.navigation.navigate('Home',{
-            accessToken:this.state.accessToken,
-            accountId:this.state.accountId,
-            clientId:this.state.clientId
-        })
+        // alert(this.state.clientId)
+        props.navigation.navigate('Home')
+        // this.props.navigation.push('Home',{
+        //     accessToken:this.state.accessToken,
+        //     accountId:this.state.accountId,
+        //     clientId:this.state.clientId
+        // })
     }
 
     render(){
@@ -51,7 +52,7 @@ class Dashboard extends Component{
                 <View style={{justifyContent:'center'}}>
                     <ScrollView horizontal={true} style={{height:120}} showsHorizontalScrollIndicator={false}>
                         <View style={{alignItems:'center',justifyContent:'center',marginLeft:16,marginRight:8}}>
-                                <TouchableOpacity onPress={()=>this.btnHome()}>
+                                <TouchableOpacity onPress={this.props.onPress}>
                                     <LinearGradient start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
             locations={[0,0.5,0.6]} colors={['#3B0AFF', '#020549']} style={{width:65,height:65,borderRadius:20,elevation:5,justifyContent:'center',alignItems:'center'}}>
                                             <Menu1/>

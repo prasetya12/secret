@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import{Icon} from 'native-base'
 import { ScrollView } from 'react-native-gesture-handler';
 import Feed from '../components/Feed'
+import { withNavigation } from "react-navigation";
 
 import {GET_TEST} from '../redux/actions/Test'
 
@@ -25,11 +26,11 @@ class Home extends Component{
             is_Liked:false,
             like_count:0,
             data:[],
-            clientId:"",
-            accessToken:"",
-            accountId:"",
+            clientId:this.props.navigation.getParam('clientId'),
+            accessToken:JSON.parse(this.props.navigation.getParam('accessToken')),
+            accountId:JSON.parse(this.props.navigation.getParam('accountId')),
             itemId:0,
-            isLoading:false,
+            refreshing:false
 
         }
       }
@@ -37,60 +38,84 @@ class Home extends Component{
         this.setState({is_Liked:!this.state.is_Liked,like_count:this.state.is_Liked?0:1})
     )
 
-    retrieveData=(bottomrefresh=false)=>{
-        if(this.state.itemId<0){
-            null;
-        }else{
-            axios.post(`${API}/stream.get.inc.php`, qs.stringify({
-                clientId: this.state.clientId,
-                accessToken:this.state.accessToken,
-                accountId:this.state.accountId,
-                itemId:this.state.itemId
+
+    
+
+    retrieveData=()=>{
+        
+        if(this.state.itemId>=0){
+            axios.post(`${API}/items.get.inc.php`, qs.stringify({
+              clientId:this.state.clientId ,
+              accessToken:this.state.accessToken,
+              accountId:this.state.accountId,
+              itemId:this.state.itemId
             })).then(response =>{
-                this.setState({
-                    data:[...this.state.data,...response.data.items],
-                    itemId:response.data.itemId
+              const listData = this.state.data
+              const data = listData.concat(response.data.items)
+              this.setState({
+                    data:data,
+                    itemId:response.data.itemId,
+                    refreshing: false
                 })
-                // this.setState({data:response.data.items,
-                //                 itemId:response.data.itemId-20})
-                // alert(JSON.stringify(response.data.items))
-    
-    
               }).catch(function (error) {
+                this.setState({refreshing:false})
                 alert(error);
               })
-        }
-
-       
+        } 
     }
 
+    onRefresh=()=>{
+        axios.post(`${API}/items.get.inc.php`, qs.stringify({
+          clientId:this.state.clientId ,
+          accessToken:this.state.accessToken,
+          accountId:this.state.accountId,
+          itemId:0
+        })).then(response =>{
+          this.setState({
+                data:response.data.items,
+                itemId:response.data.itemId,
+                refreshing: false
+            })
+          }).catch(function (error) {
+            this.setState({refreshing:false})
+            alert(error);
+          })
+    
+    }
 
-    // onScroll = ()=>{
-    //     alert(this.state.itemId)
-    //     this.setState({itemId:this.state.itemId-1})
-    // }
-
+    scrollTop=()=>{
+      this.flatListRef.scrollToOffset({animated:true,offset:0})
+    }
 
 
     componentDidMount(){
-        // await this.props.dispatch(GET_TEST());
-        // this.setState({data:this.props.test.data})
-        // const token = await AsyncStorage.getItem("accessToken");
-        // const accountId = await AsyncStorage.getItem("accountId");
+      // this.retrieveData(false);
 
-        // this.setState({accessToken:token})
-        // this.setState({accountId})
-        this.setState({
-            accessToken:this.props.navigation.getParam('accessToken'),
-            accountId:this.props.navigation.getParam('accountId'),
-            clientId:this.props.navigation.getParam('clientId')
-        })
+      const { navigation } = this.props;
+      this.focusListener = navigation.addListener("didFocus", () => {
+        this.handleRefresh()
+      });
 
-        this.retrieveData();
-
-        
+      
     }
 
+    componentWillUnmount() {
+      this.focusListener.remove();
+    }
+
+
+
+    handleRefresh = () => {
+        this.setState({
+            refreshing: true,
+        }, () => {
+          this.onRefresh();
+          this.scrollTop()
+        })
+    }
+
+   
+    
     _renderFooter = () => {
         if (!this.state.isLoading) return null;
     
@@ -112,13 +137,14 @@ class Home extends Component{
         );
       };
 
-
+      
     render(){
         return(
             
             <View style={{backgroundColor:'#EAECEE',flex:1,marginBottom:54}}>
                 <Header/>
                 <FlatList
+                     ref={(ref)=>{this.flatListRef=ref;}}
                      renderItem={({ item ,index}) => (
                         <Feed
                         is_Liked={this.state.like_count}
@@ -127,30 +153,18 @@ class Home extends Component{
                         like_count={item.likesCount}
                         comment_count={item.commentsCount}
                         key={index}
+                        
                     />
                     
                       )}
                       data={this.state.data}   
                       keyExtractor={item => item.id}
-                    //   ListFooterComponent={this._renderFooter}
+                      ListFooterComponent={this._renderFooter}
                       onEndReached={()=>this.retrieveData()}
+                      refreshing= {this.state.refreshing}
+                      onRefresh={()=>this.onRefresh()}      
                       
                 />
-                {/* <ScrollView>
-                    {this.state.data.map((item,index)=>(
-                        <Feed
-                        is_Liked={this.state.is_Liked}
-                        onPress={this.onPress}
-                        content={item.post}
-                        like_count={this.state.like_count}
-                        index={index}
-                    />
-                    ))}
-                    
-                </ScrollView> */}
-
-
-                
             </View>
         )
     }

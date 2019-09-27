@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import Home from '../screens/Home'
+import Auth from '../screens/Auth'
 import Notification from '../screens/Notification'
 import Dashboard from '../screens/Dashboard'
 import Registration from '../screens/Registration'
@@ -8,10 +9,10 @@ import Add from '../screens/Add'
 import Nearby from '../screens/Nearby'
 import Profil from '../screens/Profil'
 import Welcome from '../screens/Welcome'
-import { Icon, View } from 'native-base';
+import { Icon, View } from 'native-base'
 import TabBar from '../components/TabBar'
 
-
+import {AsyncStorage} from 'react-native'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
@@ -124,10 +125,35 @@ const BottomNavigation = createBottomTabNavigator({
   
 })
 
+// initialRoute = ()=>{
+//   return 'Dashboard'
+
+//   // try{
+//     //   AsyncStorage.getItem('accessToken').then((token) => {
+//     //     if(token!==null){
+//     //       return 'Dashboard'
+//     //     }else{
+//     //       return 'Welcome'
+//     //     }
+//     //   })
+//     // }catch(error){
+//     //     alert('error')
+//     // }
+// }
+
+
+
+
 
 const AppNavigator = createStackNavigator({
   Welcome:{
     screen:Welcome,
+    navigationOptions:{
+      header:null
+    }
+  },
+  Auth:{
+    screen:Auth,
     navigationOptions:{
       header:null
     }
@@ -157,7 +183,7 @@ const AppNavigator = createStackNavigator({
     }
   }
 },{
-  initialRouteName:"Welcome"
+  initialRouteName:'Auth'
 });
 
 export default createAppContainer(AppNavigator)

@@ -29,6 +29,8 @@ class Welcome extends Component{
     getEmailSecret = "secret+" + this.A + "@Gmail.com";
 
     onClick = ()=>{
+        // await AsyncStorage.removeItem("accessToken");
+        // await AsyncStorage.removeItem("accountId");
         this.setState({isLoading:true})
 
         axios.post(`${API}/account.signUp.inc.php`, qs.stringify({
@@ -53,6 +55,30 @@ class Welcome extends Component{
             alert(error);
           })
         }
+
+        // componentDidMount(){
+        //     this.checkUserSignedIn()
+        // }
+
+        // async checkUserSignedIn(){
+        //     try {
+        //        const token = await AsyncStorage.getItem('accessToken');
+        //        const routeName = token!=null ?"Dashboard":"Welcome"
+               
+
+        //     const resetAction = NavigationActions.reset({
+        //         index: 0,
+        //         actions: [
+        //             NavigationActions.navigate({ routeName: routeName })
+        //         ]
+        //     })
+    
+        //     this.props.navigation.dispatch(resetAction);
+
+        //     } catch (error) {
+        //       alert()
+        //     }
+        // }
 
 
   
