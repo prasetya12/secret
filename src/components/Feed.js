@@ -15,10 +15,10 @@ const Feed = (props)=>(
         <View style={{flex:4,flexDirection:'column'}}>
             <View style={{flex:3}}>
                 <Text style={{fontSize:16,fontWeight:'bold',color:'rgb(2,5,43)'}}>
-                    {props.content}
+                    {props.content.replace(/<br>/g, '\n')}
                 </Text>
             </View>
-            <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
+            <View style={{flex:1,flexDirection:'row',alignItems:'center',marginTop:5}}>
                 <Text style={{fontSize:12,color:"rgba(2,5,43,0.4)",fontWeight:'bold'}}>Bandung,1m ago</Text>
                 {props.comment_count==0?(<View/>):(<View style={{flexDirection:'row'}}><Icon name="forward" type="Entypo" style={{fontSize:16,marginLeft:10,color:"rgba(2,5,43,0.4)"}}/>
                 <Text style={{fontSize:12,color:"rgba(2,5,43,0.4)",fontWeight:'bold',marginLeft:5}}>0</Text></View>)}
