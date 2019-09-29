@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View,Text,ScrollView,TouchableOpacity,AsyncStorage} from 'react-native'
+import {View,Text,ScrollView,TouchableOpacity,AsyncStorage,SafeAreaView} from 'react-native'
 import { Button,Container} from 'native-base'
 import Carousel from '../components/Carousel'
 import HeaderDashboard from '../components/HeaderDashboard'
@@ -8,6 +8,7 @@ import Menu1 from '../assets/menu1.svg'
 import Menu2 from '../assets/menu2.svg'
 import Menu3 from '../assets/menu3.svg'
 import Menu4 from '../assets/menu4.svg'
+import StatusBar from '../components/StatusBar'
 
 
 
@@ -44,7 +45,7 @@ class Dashboard extends Component{
 
     render(){
         return(
-            <Container>
+            <SafeAreaView>
                 <HeaderDashboard/>
                 <ScrollView>
                 <View style={{height:280}}>
@@ -122,7 +123,7 @@ class Dashboard extends Component{
                     </View>
                 </View>
                 </ScrollView>
-            </Container>
+            </SafeAreaView>
         )
     }
 }

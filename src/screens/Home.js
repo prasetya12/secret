@@ -1,12 +1,12 @@
 import React,{Component} from 'react'
-import {View,Text,StyleSheet,TouchableOpacity,FlatList,ActivityIndicator} from 'react-native'
+import {View,Text,StyleSheet,TouchableOpacity,FlatList,ActivityIndicator,SafeAreaView} from 'react-native'
 import Header from '../components/Header'
 import { YellowBox } from 'react-native';
 import { connect } from 'react-redux'
 import{Icon} from 'native-base'
 import { ScrollView } from 'react-native-gesture-handler';
 import Feed from '../components/Feed'
-import { withNavigation } from "react-navigation";
+import { NavigationEvents } from "react-navigation";
 
 import {GET_TEST} from '../redux/actions/Test'
 
@@ -140,32 +140,36 @@ class Home extends Component{
       
     render(){
         return(
-            
-            <View style={{backgroundColor:'#EAECEE',flex:1,marginBottom:54}}>
-                <Header/>
-                <FlatList
-                     ref={(ref)=>{this.flatListRef=ref;}}
-                     renderItem={({ item ,index}) => (
-                        <Feed
-                        is_Liked={this.state.like_count}
-                        onPress={this.onPress}
-                        content={item.post}
-                        like_count={item.likesCount}
-                        comment_count={item.commentsCount}
-                        key={index}
-                        
-                    />
-                    
-                      )}
-                      data={this.state.data}   
-                      keyExtractor={item => item.id}
-                      ListFooterComponent={this._renderFooter}
-                      onEndReached={()=>this.retrieveData()}
-                      refreshing= {this.state.refreshing}
-                      onRefresh={()=>this.onRefresh()}      
+            <SafeAreaView style={{flex:1}}>
+              <NavigationEvents
+                onDidFocus={()=>alert('onfocus')}
+              />
+              <View style={{backgroundColor:'#EAECEE',flex:1,marginBottom:54}}>
+                  <Header/>
+                  <FlatList
+                      ref={(ref)=>{this.flatListRef=ref;}}
+                      renderItem={({ item ,index}) => (
+                          <Feed
+                          is_Liked={this.state.like_count}
+                          onPress={this.onPress}
+                          content={item.post}
+                          like_count={item.likesCount}
+                          comment_count={item.commentsCount}
+                          key={index}
+                          
+                      />
                       
-                />
-            </View>
+                        )}
+                        data={this.state.data}   
+                        keyExtractor={item => item.id}
+                        ListFooterComponent={this._renderFooter}
+                        onEndReached={()=>this.retrieveData()}
+                        refreshing= {this.state.refreshing}
+                        onRefresh={()=>this.onRefresh()}      
+                        
+                  />
+              </View>
+            </SafeAreaView>
         )
     }
 }

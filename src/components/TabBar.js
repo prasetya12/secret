@@ -88,7 +88,16 @@ class TabBar extends Component {
             accessToken: JSON.parse(this.state.accessToken),
             postText: this.state.post
         })).then(response =>{
-            alert(JSON.stringify(response))
+            
+                if(response.data.error==false){
+                    this.props.navigation.navigate('Home')
+                    this.setState({modalVisible:!this.state.modalVisible})
+                    
+
+                    
+                }else{
+                    alert('error')
+                }
                 // if(response.data.error==false){
                 //     accessToken = JSON.stringify(response.data.accessToken)
                 //     accountId = JSON.stringify(response.data.accountId)
@@ -123,7 +132,7 @@ class TabBar extends Component {
                 <DisplayModal 
                     display={this.state.modalVisible} 
                     hidemodal={()=>this.closeModal()} 
-                    onPress={()=>this.onPost()} 
+                    onPress={()=>{this.onPost()}} 
                     changeText={(text)=>this.setState({post:text,countText:300-text.length})} 
                     value={this.state.post} 
                     opacity={this.state.post.replace(/\s/g, '').length>0?1:0.5} 
