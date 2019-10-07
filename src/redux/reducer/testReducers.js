@@ -22,7 +22,6 @@ const initialState = {
 function testReducers(state = initialState, action) {
 //   console.warn(action)
   switch (action.type) {
-
       case "GET_TEST_PENDING":
           return { ...state, isLoading: true }
       case "GET_TEST_FULFILLED":
@@ -34,6 +33,8 @@ function testReducers(state = initialState, action) {
       default:
           return state
   }
+
+
 }
 
 export default testReducers

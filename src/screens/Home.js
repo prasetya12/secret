@@ -7,14 +7,12 @@ import{Icon} from 'native-base'
 import { ScrollView } from 'react-native-gesture-handler';
 import Feed from '../components/Feed'
 import { NavigationEvents } from "react-navigation";
-
 import {GET_TEST} from '../redux/actions/Test'
-
 import axios from 'axios'
-
 import qs from 'qs'
-
 import API from '../constant/constant'
+
+import allFeed from '../redux/actions/Feed'
 
 class Home extends Component{
 
@@ -25,6 +23,12 @@ class Home extends Component{
         this.state={
             is_Liked:false,
             like_count:0,
+            // data:{
+            //   clientId:this.props.navigation.getParam('clientId'),
+            //   accessToken:JSON.parse(this.props.navigation.getParam('accessToken')),
+            //   accountId:JSON.parse(this.props.navigation.getParam('accountId')),
+            //   itemId:0,
+            // },
             data:[],
             clientId:this.props.navigation.getParam('clientId'),
             accessToken:JSON.parse(this.props.navigation.getParam('accessToken')),
@@ -34,9 +38,37 @@ class Home extends Component{
 
         }
       }
-    onPress = ()=>(
-        this.setState({is_Liked:!this.state.is_Liked,like_count:this.state.is_Liked?0:1})
+
+      // updateItem(id, itemAttributes) {
+      //   var index = this.state.items.findIndex(x=> x.id === id);
+      //   if (index === -1){
+
+      //   }  // handle error
+      //   else
+      //     this.setState({
+      //       items: [
+      //          ...this.state.items.slice(0,index),
+      //          Object.assign({}, this.state.items[index], itemAttributes),
+      //          ...this.state.items.slice(index+1)
+      //       ]
+      //     });
+      // }
+    btnLike = (id)=>(
+      // alert(JSON.stringify(this.state.data))
+      
+
+      axios.post(`${API}/items.like.inc.php`, qs.stringify({
+        accessToken:this.state.accessToken,
+        accountId:this.state.accountId,
+        itemId:id
+      })).then(response =>{
+        this.onRefresh()  
+      }).catch(function (error) {
+          this.setState({refreshing:false})
+          alert(error);
+        })
     )
+
 
 
     
@@ -88,9 +120,9 @@ class Home extends Component{
     }
 
 
-    componentDidMount(){
-      // this.retrieveData(false);
-
+       componentDidMount(){
+        // await this.props.dispatch(allFeed(this.state.data))
+        // await this.props.dispatch(GET_TEST())
       const { navigation } = this.props;
       this.focusListener = navigation.addListener("didFocus", () => {
         this.handleRefresh()
@@ -102,8 +134,6 @@ class Home extends Component{
     componentWillUnmount() {
       this.focusListener.remove();
     }
-
-
 
     handleRefresh = () => {
         this.setState({
@@ -141,21 +171,19 @@ class Home extends Component{
     render(){
         return(
             <SafeAreaView style={{flex:1}}>
-              <NavigationEvents
-                onDidFocus={()=>alert('onfocus')}
-              />
               <View style={{backgroundColor:'#EAECEE',flex:1,marginBottom:54}}>
                   <Header/>
                   <FlatList
                       ref={(ref)=>{this.flatListRef=ref;}}
                       renderItem={({ item ,index}) => (
                           <Feed
-                          is_Liked={this.state.like_count}
-                          onPress={this.onPress}
+                          is_Liked={item.myLike}
+                          onPress={()=>this.btnLike(item.id)}
                           content={item.post}
                           like_count={item.likesCount}
                           comment_count={item.commentsCount}
                           key={index}
+                          timeAgo={item.timeAgo}
                           
                       />
                       
@@ -175,12 +203,13 @@ class Home extends Component{
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-      test: state.testReducers,
+// const mapStateToProps = (state) => {
+//     return {
+//       test: state.testReducers,
+//       feed: state.Feed
 
-    }
-  }
+//     }
+//   }
 
-export default connect(mapStateToProps)(Home)
+export default Home
 

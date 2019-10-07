@@ -1,8 +1,11 @@
 import testReducers from './testReducers'
+import Feed from './Feed'
 import {combineReducers} from 'redux'
 
 
 
-export default combineReducers({
-    testReducers
+const someApp= combineReducers({
+    Feed
 })
+
+export default someApp

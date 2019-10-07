@@ -90,7 +90,7 @@ class TabBar extends Component {
         })).then(response =>{
             
                 if(response.data.error==false){
-                    this.props.navigation.navigate('Home')
+                    this.props.navigation.navigate('Root')
                     this.setState({modalVisible:!this.state.modalVisible})
                     
 
@@ -126,9 +126,6 @@ class TabBar extends Component {
         const {routes,index:activeRouteIndex} = navigation.state;
         return(
             <View style={{flexDirection:"row",height:52}}>
-                {/* ()=>{onTabPress({route})
-                            } */}
-    
                 <DisplayModal 
                     display={this.state.modalVisible} 
                     hidemodal={()=>this.closeModal()} 
@@ -149,7 +146,7 @@ class TabBar extends Component {
                             <TouchableWithoutFeedback onPress={()=>this.triggerModal()} key={routeIndex} >
                                 <View style={{backgroundColor:'#DA3037',elevation:3,height:60,width:60,borderRadius:50,marginTop:-20,alignItems:'center',justifyContent:'center'}} >
                                     {renderIcon({route,focused:isRouteActive})}
-    
+                                    
                                 </View>
                             </TouchableWithoutFeedback>
                         )

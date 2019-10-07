@@ -19,7 +19,7 @@ const Feed = (props)=>(
                 </Text>
             </View>
             <View style={{flex:1,flexDirection:'row',alignItems:'center',marginTop:20}}>
-                <Text style={{fontSize:10,color:"rgba(2,5,43,0.4)"}}>1m ago</Text>
+                <Text style={{fontSize:10,color:"rgba(2,5,43,0.4)"}}>{props.timeAgo}</Text>
                 {props.comment_count==0?(<View/>):(<View style={{flexDirection:'row'}}><Icon name="forward" type="Entypo" style={{fontSize:16,marginLeft:10,color:"rgba(2,5,43,0.4)"}}/>
                 <Text style={{fontSize:10,color:"rgba(2,5,43,0.4)",marginLeft:10}}>0</Text></View>)}
             </View>
