@@ -39,35 +39,30 @@ class Home extends Component{
         }
       }
 
-      // updateItem(id, itemAttributes) {
-      //   var index = this.state.items.findIndex(x=> x.id === id);
-      //   if (index === -1){
+    
+    btnLike = (index,id)=>{
+      const newData = this.state.data.slice()
+      newData[index].myLike = !newData[index].myLike
 
-      //   }  // handle error
-      //   else
-      //     this.setState({
-      //       items: [
-      //          ...this.state.items.slice(0,index),
-      //          Object.assign({}, this.state.items[index], itemAttributes),
-      //          ...this.state.items.slice(index+1)
-      //       ]
-      //     });
-      // }
-    btnLike = (id)=>(
-      // alert(JSON.stringify(this.state.data))
-      
+      if(newData[index].myLike==false){
+        newData[index].likesCount = parseInt(newData[index].likesCount)-1
+      }else{
+        newData[index].likesCount = parseInt(newData[index].likesCount)+1
+      }
+      this.setState({data:newData})
 
-      axios.post(`${API}/items.like.inc.php`, qs.stringify({
+      axios.post(`${API}/items.like.inc.php`,qs.stringify({
         accessToken:this.state.accessToken,
         accountId:this.state.accountId,
         itemId:id
-      })).then(response =>{
-        this.onRefresh()  
-      }).catch(function (error) {
-          this.setState({refreshing:false})
-          alert(error);
-        })
-    )
+      })).then(response=>{
+      }).catch(function(error){
+        alert(error)
+      })
+
+      
+    }
+
 
 
 
@@ -178,12 +173,13 @@ class Home extends Component{
                       renderItem={({ item ,index}) => (
                           <Feed
                           is_Liked={item.myLike}
-                          onPress={()=>this.btnLike(item.id)}
+                          btnLike={()=>this.btnLike(index,item.id)}
                           content={item.post}
                           like_count={item.likesCount}
                           comment_count={item.commentsCount}
                           key={index}
                           timeAgo={item.timeAgo}
+                          onPress={()=>this.props.navigation.navigate('Detail')}
                           
                       />
                       

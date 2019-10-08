@@ -9,8 +9,10 @@ import Add from '../screens/Add'
 import Nearby from '../screens/Nearby'
 import Profil from '../screens/Profil'
 import Welcome from '../screens/Welcome'
+import Detail from '../screens/Detail'
 import { Icon, View } from 'native-base'
 import TabBar from '../components/TabBar'
+import {Animated,Easing} from 'react-native'
 
 import {AsyncStorage} from 'react-native'
 import { createAppContainer } from 'react-navigation'
@@ -18,13 +20,46 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 
 
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 750,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: sceneProps => {      
+      const { layout, position, scene } = sceneProps
+
+      const thisSceneIndex = scene.index
+      const width = layout.initWidth
+
+      const translateX = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex],
+        outputRange: [width, 0],
+      })
+
+      return { transform: [ { translateX } ] }
+    },
+  }
+}
+
 const HomeStack = createStackNavigator({
   Home:{
     screen:Home,
     navigationOptions:{
       header:null
     }
+  },
+  Detail:{
+    screen:Detail,
+    navigationOptions:{
+      header:null
+    }
   }
+  
+},{
+  transitionConfig
 })
 
 
@@ -64,11 +99,28 @@ const ProfilStack = createStackNavigator({
   }
 })
 
-HomeStack.navigationOptions = {
-  tabBarIcon : ({tintColor})=>(
-    <Icon name='home' type='Entypo' style={{color:tintColor || 'black',fontSize:25}}/>
+// HomeStack.navigationOptions = {
+//   tabBarIcon : ({tintColor})=>(
+//     <Icon name='home' type='Entypo' style={{color:tintColor || 'black',fontSize:25}}/>
 
-  )
+//   )
+// }
+
+HomeStack.navigationOptions=({navigation})=>{
+  let tabBarVisible = true;
+  let routeName= navigation.state.routes[navigation.state.index].routeName
+
+  if(routeName=='Detail'){
+    tabBarVisible=false
+  }
+
+  return{
+    tabBarIcon : ({tintColor})=>(
+      <Icon name='home' type='Entypo' style={{color:tintColor || 'black',fontSize:25}}/>
+    ),
+
+    tabBarVisible
+  }
 }
 
 NotificationStack.navigationOptions = {
