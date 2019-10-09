@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View,Text,AsyncStorage} from 'react-native'
+import {View,Text,AsyncStorage,FlatList} from 'react-native'
 import Header from '../components/Header'
 import StatusBar from '../components/StatusBar'
 import Feed from '../components/Feed'
@@ -23,7 +23,8 @@ class Detail extends Component{
             accessToken:this.props.navigation.getParam('accessToken'),
             accountId:this.props.navigation.getParam('accountId'),
             clientId:this.props.navigation.getParam('clientId'),
-            itemId:this.props.navigation.getParam('itemId')
+            itemId:this.props.navigation.getParam('itemId'),
+            dataComments:[]
 
         }
     }
@@ -58,7 +59,8 @@ class Detail extends Component{
                   myLike:data.myLike,
                   likeCount:data.likesCount,
                   postContent: data.post,
-                  timeAgo:data.timeAgo
+                  timeAgo:data.timeAgo,
+                  dataComments:response.data.comments.comments
               })
             }).catch(function (error) {
               this.setState({refreshing:false})
@@ -84,8 +86,20 @@ class Detail extends Component{
                     timeAgo={this.state.timeAgo}
                     
                 />
-                <View style={{marginTop:5}}>
-                    <Comment/>
+                <View>
+                <FlatList
+                      ref={(ref)=>{this.flatListRef=ref;}}
+                      renderItem={({ item ,index}) => (
+                          <Comment
+                            commentText={item.comment}
+                            timeAgo={item.timeAgo}
+                            avatar={item.image}
+                          />
+                      
+                        )}
+                        data={this.state.dataComments}        
+                        
+                  />
                 </View>
             </View>
         )
