@@ -5,7 +5,7 @@ import {Icon} from 'native-base'
 class Comment extends Component{
     render(){
         return(
-            <View style={{backgroundColor:'white',height:70,flexDirection:'row',paddingRight:16,paddingLeft:10}}>
+            <View style={{backgroundColor:'white',flexDirection:'row',paddingRight:16,paddingLeft:10,paddingTop:8,paddingBottom:8}}>
                 <View style={{flex:2,alignItems:'center',justifyContent:'center'}}>
                     <Image source={require('../assets/emoji/002.png')} style={{width:40,height:40}}/>
                 </View>
