@@ -1,6 +1,9 @@
 import React,{Component} from 'react'
-import {View,Text,StyleSheet,TouchableOpacity,FlatList,ActivityIndicator,SafeAreaView} from 'react-native'
+import {View,Text,StyleSheet,TouchableOpacity,FlatList,ActivityIndicator} from 'react-native'
+
 import Header from '../components/Header'
+import StatusBar from '../components/StatusBar'
+
 import { YellowBox } from 'react-native';
 import { connect } from 'react-redux'
 import{Icon} from 'native-base'
@@ -11,7 +14,6 @@ import {GET_TEST} from '../redux/actions/Test'
 import axios from 'axios'
 import qs from 'qs'
 import API from '../constant/constant'
-
 import allFeed from '../redux/actions/Feed'
 
 class Home extends Component{
@@ -165,9 +167,13 @@ class Home extends Component{
       
     render(){
         return(
-            <SafeAreaView style={{flex:1}}>
+            
               <View style={{backgroundColor:'#EAECEE',flex:1,marginBottom:54}}>
-                  <Header/>
+                  <StatusBar/>
+                  <Header
+                    leftIconName={"menu"}
+                    leftIconType={"MaterialCommunityIcons"}
+                  />
                   <FlatList
                       ref={(ref)=>{this.flatListRef=ref;}}
                       renderItem={({ item ,index}) => (
@@ -179,7 +185,12 @@ class Home extends Component{
                           comment_count={item.commentsCount}
                           key={index}
                           timeAgo={item.timeAgo}
-                          onPress={()=>this.props.navigation.navigate('Detail')}
+                          onPress={()=>this.props.navigation.navigate('Detail',{
+                            accessToken:this.state.accessToken,
+                            accountId:this.state.accountId,
+                            clientId:this.state.clientId,
+                            itemId:item.id
+                        })}
                           
                       />
                       
@@ -193,7 +204,6 @@ class Home extends Component{
                         
                   />
               </View>
-            </SafeAreaView>
         )
     }
 }

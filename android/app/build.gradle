@@ -128,7 +128,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "id.anonymous.curhat2"
+        // applicationId "id.anonymous.curhat2"
+        applicationId "com.secretapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

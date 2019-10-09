@@ -45,7 +45,8 @@ class Dashboard extends Component{
 
     render(){
         return(
-            <SafeAreaView>
+            <View style={{flex:1}}>
+                <StatusBar/>
                 <HeaderDashboard/>
                 <ScrollView>
                 <View style={{height:280}}>
@@ -123,7 +124,7 @@ class Dashboard extends Component{
                     </View>
                 </View>
                 </ScrollView>
-            </SafeAreaView>
+            </View>
         )
     }
 }
