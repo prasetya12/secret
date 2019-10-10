@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View,Text,AsyncStorage,FlatList} from 'react-native'
+import {View,Text,AsyncStorage,FlatList,TextInput} from 'react-native'
 import Header from '../components/Header'
 import StatusBar from '../components/StatusBar'
 import Feed from '../components/Feed'
@@ -87,19 +87,31 @@ class Detail extends Component{
                     
                 />
                 <View>
-                <FlatList
-                      ref={(ref)=>{this.flatListRef=ref;}}
-                      renderItem={({ item ,index}) => (
-                          <Comment
-                            commentText={item.comment}
-                            timeAgo={item.timeAgo}
-                            avatar={item.image}
-                          />
-                      
-                        )}
-                        data={this.state.dataComments}        
+                    <FlatList
+                        ref={(ref)=>{this.flatListRef=ref;}}
+                        renderItem={({ item ,index}) => (
+                            <Comment
+                                commentText={item.comment}
+                                timeAgo={item.timeAgo}
+                                avatar={item.image}
+                            />
                         
-                  />
+                            )}
+                            data={this.state.dataComments}        
+                            
+                    />
+                </View>
+                <View style={{backgroundColor:'#EAECEE',height:50,width:'100%',bottom:0,position:'absolute',elevation:10,flex:1,alignItems:'center',flexDirection:'row'}}>
+                    <View style={{width:300, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center',paddingLeft:10,flex:3}}>
+                        <TextInput
+                            style={{width:'100%',height:50,paddingLeft:10,color:'#02052B'}}
+                            placeholder={"Type a comment ..."}
+                            autoFocus={true}
+                        />
+                    </View>
+                    <View style={{width:70,height:50,backgroundColor:'#30375A',alignItems:'center',justifyContent:'center',elevation:5}}>
+                        <Text style={{color:'white'}}>Send</Text>
+                    </View>
                 </View>
             </View>
         )
