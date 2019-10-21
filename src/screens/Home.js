@@ -71,7 +71,6 @@ class Home extends Component{
     
 
     retrieveData=()=>{
-        
         if(this.state.itemId>=0){
             axios.post(`${API}/items.get.inc.php`, qs.stringify({
               clientId:this.state.clientId ,
@@ -117,7 +116,7 @@ class Home extends Component{
     }
 
 
-       componentDidMount(){
+    componentDidMount(){
         // await this.props.dispatch(allFeed(this.state.data))
         // await this.props.dispatch(GET_TEST())
       const { navigation } = this.props;
@@ -145,7 +144,6 @@ class Home extends Component{
     
     _renderFooter = () => {
         if (!this.state.isLoading) return null;
-    
         return (
           <View
             style={{

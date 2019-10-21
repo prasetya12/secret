@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {View,TouchableOpacity,TouchableWithoutFeedback,Text,TouchableHighlight,TextInput,AsyncStorage} from 'react-native'
+import {View,TouchableOpacity,TouchableWithoutFeedback,Text,TouchableHighlight,TextInput,AsyncStorage,ActivityIndicator} from 'react-native'
 import Modal from "react-native-modal";
 import {Button,Icon} from 'native-base'
 import axios from 'axios'
@@ -29,7 +29,13 @@ const DisplayModal = (props)=>(
                 </View>
                 <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
                     <View style={{height:40,width:70,backgroundColor:'#30375A',opacity:props.opacity,borderRadius:10,elevation:5,alignItems:'center',justifyContent:'center'}}>
-                        <Text style={{color:'white',fontWeight:'bold'}}>Post</Text>
+                        {props.refreshing?(
+                            <ActivityIndicator size="small" color="white"/>
+                        ):(
+                             <Text style={{color:'white',fontWeight:'bold'}}>Post</Text>
+                            
+                        )}
+                        
                     </View>
                 </TouchableOpacity>
             </View>
@@ -48,7 +54,8 @@ class TabBar extends Component {
             accessToken:"",
             clientId:1,
             post:"",
-            countText:300
+            countText:300,
+            refreshing:false
         }
     }
 
@@ -82,6 +89,9 @@ class TabBar extends Component {
     }
 
     onPost = ()=>{
+        this.setState({
+            refreshing:true
+        })
         axios.post(`${API}/items.new.inc.php`, qs.stringify({
             clientId: this.state.clientId,
             accountId: JSON.parse(this.state.accountId),
@@ -98,6 +108,11 @@ class TabBar extends Component {
                 }else{
                     alert('error')
                 }
+                this.setState({
+                    post:"",
+                    refreshing:false,
+                    countText:300
+                })
                 // if(response.data.error==false){
                 //     accessToken = JSON.stringify(response.data.accessToken)
                 //     accountId = JSON.stringify(response.data.accountId)
@@ -117,6 +132,9 @@ class TabBar extends Component {
     
           }).catch(error => {
             alert(error);
+            this.setState({
+                refreshing:false
+            })
           })
     
     }
@@ -135,6 +153,7 @@ class TabBar extends Component {
                     opacity={this.state.post.replace(/\s/g, '').length>0?1:0.5} 
                     disabled={this.state.post.replace(/\s/g, '').length>0?false:true}
                     countText={this.state.countText}
+                    refreshing={this.state.refreshing}
                     />
                 
                 {routes.map((route,routeIndex)=>{

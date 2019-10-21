@@ -4,7 +4,7 @@ import {Icon} from 'native-base'
 
 
 const convertUri=(uri)=>{
-    const randomNumber = Math.ceil(Math.random() * 53)
+    const randomNumber = Math.ceil(Math.random()*53)
 
     const newUri = "https://old.secretly.tech/img/avatars/"+randomNumber+".png"
 
